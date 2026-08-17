@@ -1,0 +1,15 @@
+# Node
+node_modules/
+*.log
+package-lock.json
+.DS_Store
+
+# Vendored reference sources + verification scripts (never commit)
+reference/
+preview/
+
+# Local diagnostics and generated review artifacts
+dump-config.txt
+tmp-codex-log-inspect.py
+.dsh-vision-toolkit/
+*.tmp

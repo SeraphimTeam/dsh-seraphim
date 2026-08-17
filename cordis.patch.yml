@@ -1,0 +1,97 @@
+# Seraphim — merged LLM provider bundle patch.
+# A single host row (llm-seraphim) that registers all five providers
+# (claude-code, freebuff, commandcode, zed, codex) as native dsh LLM routes.
+# The merged plugin fans out to each provider's own apply() with its own
+# settings namespace, so the picker shows all five providers and their models
+# exactly as before the merge. It does NOT change the profile's default model
+# or web-search route.
+#
+# `name` is the merged plugin package; the config below is the union of the
+# five original per-provider configs, keyed by provider.
+- insert:
+    - id: llm-seraphim
+      name: dsh-seraphim
+      config:
+        providers:
+          claude-code:
+            baseURL: https://api.anthropic.com
+            oauthAuthorizeURL: https://claude.com/cai/oauth/authorize
+            oauthTokenURL: https://platform.claude.com/v1/oauth/token
+            oauthClientId: 9d1c250a-e61b-44d9-88ed-5944d1962f5e
+            clientVersion: 2.1.162
+            models:
+              - { id: anthropic/claude-opus-5, name: Claude Opus 5, upstream: claude-opus-5, contextWindow: 200000, maxTokens: 32768 }
+              - { id: anthropic/claude-sonnet-5, name: Claude Sonnet 5, upstream: claude-sonnet-5, contextWindow: 200000, maxTokens: 32768 }
+              - { id: anthropic/claude-opus-4-8, name: Claude Opus 4.8, upstream: claude-opus-4-8, contextWindow: 200000, maxTokens: 32768 }
+              - { id: anthropic/claude-opus-4-7, name: Claude Opus 4.7, upstream: claude-opus-4-7, contextWindow: 200000, maxTokens: 32768 }
+              - { id: anthropic/claude-sonnet-4-6, name: Claude Sonnet 4.6, upstream: claude-sonnet-4-6, contextWindow: 200000, maxTokens: 32768 }
+              - { id: anthropic/claude-opus-4-6, name: Claude Opus 4.6, upstream: claude-opus-4-6, contextWindow: 200000, maxTokens: 32768 }
+              - { id: anthropic/claude-opus-4-5-20251101, name: Claude Opus 4.5, upstream: claude-opus-4-5-20251101, contextWindow: 200000, maxTokens: 32768 }
+              - { id: anthropic/claude-haiku-4-5-20251001, name: Claude Haiku 4.5, upstream: claude-haiku-4-5-20251001, contextWindow: 200000, maxTokens: 32768 }
+              - { id: anthropic/claude-sonnet-4-5-20250929, name: Claude Sonnet 4.5, upstream: claude-sonnet-4-5-20250929, contextWindow: 200000, maxTokens: 32768 }
+            excludedModelIds:
+              - claude-fable-5
+          freebuff:
+            baseURL: https://www.codebuff.com
+            models:
+              - { id: deepseek/deepseek-v4-flash, name: DeepSeek V4 Flash, session: deepseek/deepseek-v4-flash, agent: base2-free-deepseek-flash, upstream: deepseek/deepseek-v4-flash, contextWindow: 262144 }
+              - { id: mimo/mimo-v2.5, name: MiMo V2.5, session: mimo/mimo-v2.5, agent: base2-free-mimo, upstream: mimo/mimo-v2.5, contextWindow: 262144 }
+              - { id: deepseek/deepseek-v4-pro, name: DeepSeek V4 Pro, session: deepseek/deepseek-v4-pro, agent: base2-free-deepseek, upstream: deepseek/deepseek-v4-pro, contextWindow: 262144 }
+              - { id: openai/gpt-5.6-luna, name: GPT-5.6 Luna, session: openai/gpt-5.6-luna, agent: base2-free-luna, upstream: openai/gpt-5.6-luna, contextWindow: 262144 }
+              - { id: minimax/minimax-m3, name: MiniMax M3, session: minimax/minimax-m3, agent: base2-free-minimax-m3, upstream: minimax/minimax-m3, contextWindow: 262144 }
+              - { id: poolside/laguna-s-2.1, name: Laguna S 2.1, session: poolside/laguna-s-2.1, agent: base2-free-laguna-s-2-1, upstream: poolside/laguna-s-2.1, contextWindow: 262144 }
+              - { id: openrouter/poolside/laguna-s-2.1, name: Laguna S 2.1 (OpenRouter), session: openrouter/poolside/laguna-s-2.1, agent: base2-free-laguna-s-2-1-openrouter, upstream: openrouter/poolside/laguna-s-2.1, contextWindow: 262144 }
+              - { id: crof/kimi-k3-eco, name: Kimi K3 Eco, session: crof/kimi-k3-eco, agent: base2-free-kimi-k3-eco, upstream: crof/kimi-k3-eco, contextWindow: 262144 }
+              - { id: meta/muse-spark-1.2-contributor, name: Muse Spark 1.2, session: meta/muse-spark-1.2-contributor, agent: base2-free-muse-spark, upstream: meta/muse-spark-1.2-contributor, contextWindow: 262144 }
+              - { id: z-ai/glm-5.2, name: GLM 5.2, session: z-ai/glm-5.2, agent: base2-free-glm, upstream: z-ai/glm-5.2, contextWindow: 262144 }
+              - { id: anthropic/claude-fable-5, name: Claude Fable 5, session: anthropic/claude-fable-5, agent: base2-free-fable, upstream: anthropic/claude-fable-5, contextWindow: 262144 }
+          commandcode:
+            apiBase: https://api.commandcode.ai
+            workingDir: ""
+            models:
+              - { id: deepseek/deepseek-v4-flash, name: DeepSeek V4 Flash (CC), contextWindow: 262144 }
+              - { id: deepseek/deepseek-v4-pro, name: DeepSeek V4 Pro (CC), contextWindow: 262144 }
+              - { id: MiniMaxAI/MiniMax-M3, name: MiniMax M3 (CC), contextWindow: 1048576 }
+              - { id: moonshotai/Kimi-K3, name: Kimi K3 (CC), contextWindow: 1048576 }
+              - { id: zai-org/GLM-5.2, name: GLM 5.2 (CC), contextWindow: 262144 }
+              - { id: Qwen/Qwen3.7-Flash, name: Qwen 3.7 Flash (CC), contextWindow: 262144 }
+              - { id: xiaomi/mimo-v2.5, name: MiMo V2.5 (CC), contextWindow: 1048576 }
+              - { id: google/gemini-3.6-flash, name: Gemini 3.6 Flash (CC), contextWindow: 1048576 }
+              - { id: gpt-5.4, name: GPT-5.4 (CC), contextWindow: 400000 }
+              - { id: gpt-5.6-luna, name: GPT-5.6 Luna (CC), contextWindow: 1050000 }
+              - { id: claude-sonnet-5, name: Claude Sonnet 5 (CC), contextWindow: 1000000 }
+              - { id: claude-opus-5, name: Claude Opus 5 (CC), contextWindow: 1000000 }
+          zed:
+            baseURL: https://cloud.zed.dev
+            signInBaseURL: https://zed.dev
+            models:
+              - { id: anthropic/claude-sonnet-5, upstream: claude-sonnet-5, contextWindow: 1000000 }
+              - { id: anthropic/claude-sonnet-4-6, upstream: claude-sonnet-4-6, contextWindow: 1000000 }
+              - { id: anthropic/claude-sonnet-4-5, upstream: claude-sonnet-4-5, contextWindow: 200000 }
+              - { id: anthropic/claude-haiku-4-5, upstream: claude-haiku-4-5, contextWindow: 200000 }
+              - { id: openai/gpt-5.6-sol, upstream: gpt-5.6-sol, contextWindow: 400000 }
+              - { id: openai/gpt-5.6-terra, upstream: gpt-5.6-terra, contextWindow: 400000 }
+              - { id: openai/gpt-5.6-luna, upstream: gpt-5.6-luna, contextWindow: 400000 }
+              - { id: openai/gpt-5.5, upstream: gpt-5.5, contextWindow: 400000 }
+              - { id: openai/gpt-5.4, upstream: gpt-5.4, contextWindow: 400000 }
+              - { id: openai/gpt-5.3-codex, upstream: gpt-5.3-codex, contextWindow: 400000 }
+              - { id: openai/gpt-5.2, upstream: gpt-5.2, contextWindow: 400000 }
+              - { id: openai/gpt-5-mini, upstream: gpt-5-mini, contextWindow: 400000 }
+              - { id: openai/gpt-5-nano, upstream: gpt-5-nano, contextWindow: 400000 }
+              - { id: google/gemini-3.1-pro-preview, upstream: gemini-3.1-pro-preview, contextWindow: 200000 }
+              - { id: google/gemini-3.5-flash, upstream: gemini-3.5-flash, contextWindow: 1048576 }
+              - { id: google/gemini-3-flash, upstream: gemini-3-flash, contextWindow: 1048576 }
+          codex:
+            baseURL: https://chatgpt.com/backend-api
+            authBaseURL: https://auth.openai.com
+            oauthClientId: app_EMoamEEZ73f0CkXaXp7hrann
+            oauthRedirectUri: http://localhost:1455/auth/callback
+            clientVersion: "0.147.0"
+            models:
+              - { id: gpt-5.6-sol, name: GPT-5.6 Sol, upstream: gpt-5.6-sol, contextWindow: 272000, effortLevels: [low, medium, high, xhigh, max, ultra] }
+              - { id: gpt-5.6-terra, name: GPT-5.6 Terra, upstream: gpt-5.6-terra, contextWindow: 272000, effortLevels: [low, medium, high, xhigh, max, ultra] }
+              - { id: gpt-5.6-luna, name: GPT-5.6 Luna, upstream: gpt-5.6-luna, contextWindow: 272000, effortLevels: [low, medium, high, xhigh, max] }
+              - { id: gpt-5.5, name: GPT-5.5, upstream: gpt-5.5, contextWindow: 272000, effortLevels: [low, medium, high, xhigh] }
+              - { id: gpt-5.4, name: GPT-5.4, upstream: gpt-5.4, contextWindow: 272000, effortLevels: [low, medium, high, xhigh] }
+              - { id: gpt-5.4-mini, name: GPT-5.4 Mini, upstream: gpt-5.4-mini, contextWindow: 272000, effortLevels: [low, medium, high, xhigh] }
+              - { id: gpt-5.3-codex-spark, name: GPT-5.3 Codex Spark, upstream: gpt-5.3-codex-spark, contextWindow: 128000, effortLevels: [low, medium, high] }
