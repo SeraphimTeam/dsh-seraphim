@@ -1,8 +1,0 @@
-{
-  "schemaVersion": "aegis.schema.v0",
-  "affectedLayers": ["host settings", "browser settings UI", "composer model slot", "shared model directory"],
-  "owners": ["Seraphim config and picker UI", "DSH settingsScope", "DSH ModelDirectory", "DSH native model slot"],
-  "invariants": ["one persisted seraphim namespace", "one per-session ModelDirectory", "native picker remains sole owner when toggle is off", "existing /model and provider routes remain unchanged"],
-  "compatBoundary": "Provider adapters, credentials, catalogs, provider flags, native picker, /model, and persistence ownership remain unchanged; Seraphim only conditionally shadows the composer slot.",
-  "nonGoals": ["No DSH checkout edits", "No duplicate model cache, selection RPC, command, or persistence route"]
-}
