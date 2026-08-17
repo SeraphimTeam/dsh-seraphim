@@ -31,7 +31,11 @@ single **Settings → Seraphim** section:
   its own config slice. Each provider keeps its own settings namespace and
   adapter registration, so model picker entries behave exactly as before.
 - `lib/client.js` registers a `settings.section` slot (`id: "seraphim"`,
-  order 20) that renders all five account cards.
+  order 20) that renders all five account cards and the Seraphim-only **Better
+  Model Selection** toggle. When enabled, the composer model control uses a
+  provider-first two-pane picker; when disabled, the native DSH picker remains
+  active. Both surfaces share DSH's per-session model directory, and `/model`
+  remains unchanged.
 
 ## Codex notes
 

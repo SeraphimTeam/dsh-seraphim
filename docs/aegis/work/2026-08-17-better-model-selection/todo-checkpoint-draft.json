@@ -1,0 +1,11 @@
+{
+  "schemaVersion": "aegis.schema.v0",
+  "taskId": "2026-08-17-better-model-selection",
+  "currentTodo": "Complete git closeout after verification.",
+  "completedTodos": ["config and host settings", "conditional picker and settings wiring", "static client graph and Desktop recomposition", "focused checks and review fixes", "Aegis workspace validation"],
+  "activeSlice": "final evidence receipt and task-owned commit",
+  "evidenceRefs": ["preview/test-seraphim-config.mjs", "preview/test-provider-flags.mjs", "preview/test-slot-priority.mjs", "preview/client-bundle-check.mjs", "http://127.0.0.1:43900"],
+  "blockedOn": "browser-level DOM, keyboard, mobile, and screenshot interaction evidence unavailable in this tool context",
+  "nextStep": "Record final review result, create task-owned commit, push main, and read back Git receipt.",
+  "updatedAt": "2026-08-17"
+}

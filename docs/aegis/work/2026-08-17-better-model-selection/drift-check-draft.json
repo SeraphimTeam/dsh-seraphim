@@ -1,0 +1,11 @@
+{
+  "schemaVersion": "aegis.schema.v0",
+  "taskId": "2026-08-17-better-model-selection",
+  "taskIntentRef": "docs/aegis/work/2026-08-17-better-model-selection/task-intent-draft.json",
+  "baselineRefs": ["README.md", "docs/aegis/BASELINE-GOVERNANCE.md", "docs/aegis/plans/2026-08-17-better-model-selection.md", "docs/aegis/work/2026-08-17-better-model-selection/10-intent.md"],
+  "scopeStatus": "aligned",
+  "compatStatus": "aligned",
+  "retirementStatus": "aligned-native-fallback-retained",
+  "newRiskSignals": ["browser DOM/keyboard/mobile interaction not directly observed"],
+  "decision": "needs-verification"
+}

@@ -1,0 +1,22 @@
+{
+  "schemaVersion": "aegis.schema.v0",
+  "requestedOutcome": "Implement and verify the approved Seraphim provider-first model picker with a persisted toggle and native fallback",
+  "goal": "Implement and verify the approved Seraphim provider-first model picker with a persisted toggle and native fallback",
+  "successEvidence": [
+    "false-default Schemastery setting registered under the seraphim namespace",
+    "conditional conversation.input.model shadow uses the shared ModelDirectory and restores native fallback on disable",
+    "focused syntax, config, provider-flags, client-bundle, and SlotCore checks pass",
+    "existing DSH GUI serves the recomposed dsh-seraphim artifact with the model-selection injection"
+  ],
+  "stopCondition": "Stop when success evidence is satisfied or a blocker/risk requires pause.",
+  "nonGoals": [
+    "No DSH checkout edits",
+    "No provider adapter, credentials, catalog, native picker, or /model command changes",
+    "No duplicate model state, cache, persistence route, or selection RPC"
+  ],
+  "scope": "Seraphim host settings namespace, browser Settings toggle, conditional composer model slot, focused and Web GUI verification",
+  "changeKinds": [
+    "feature"
+  ],
+  "riskHints": []
+}
