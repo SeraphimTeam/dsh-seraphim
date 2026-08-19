@@ -53,7 +53,7 @@ single **Settings → Seraphim** section:
 ## Install into a DSH profile
 
 ```bash
-dsh plugin --profile web add dsh-seraphim
+dsh plugin --profile desktop add github:seraphimTeam/dsh-seraphim
 ```
 
 Or manually: add `"dsh-seraphim": "link:<abs-path>"` to the profile's
